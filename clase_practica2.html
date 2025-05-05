@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrusel de Imágenes</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #ddd9d9;
+      margin: 0;
+      font-family: sans-serif;
+    }
+    .carrusel {
+      position: relative;
+      width: 400px;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+    .imagenes {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+    .imagenes img {
+      width: 400px;
+      height: 250px;
+      object-fit: cover;
+    }
+    .boton {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .boton.izquierda {
+      left: 10px;
+    }
+    .boton.derecha {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="carrusel">
+    <div class="imagenes" id="contenedor">
+      <img src="https://picsum.photos/id/1011/400/250" alt="Imagen 1">
+      <img src="https://picsum.photos/id/1020/400/250" alt="Imagen 2">
+      <img src="https://picsum.photos/id/1035/400/250" alt="Imagen 3">
+    </div>
+    <button class="boton izquierda" onclick="anterior()">&#8592;</button>
+    <button class="boton derecha" onclick="siguiente()">&#8594;</button>
+  </div>
+
+  <script>
+    const contenedor = document.getElementById("contenedor");
+    const total = contenedor.children.length;
+    let indice = 0;
+
+    function actualizarCarrusel() {
+      contenedor.style.transform = `translateX(-${indice * 400}px)`;
+    }
+
+    function siguiente() {
+      indice = (indice + 1) % total;
+      actualizarCarrusel();
+    }
+
+    function anterior() {
+      indice = (indice - 1 + total) % total;
+      actualizarCarrusel();
+    }
+  </script>
+</body>
+</html>
